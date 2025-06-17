@@ -18,17 +18,17 @@
                 </a>
             </li>
 
-            @if (auth()->user()->user_type == 'system')
+            @if (auth()->user()->user_type == 'admin')
                 @include('backend.partials.__sidebar_for_system_user')
             @endif
 
-            @if (auth()->user()->user_type == 'hr')
+            {{-- @if (auth()->user()->user_type == 'hr')
                 @include('backend.partials.__sidebar_for_hr_user')
             @endif
 
             @if (auth()->user()->user_type == 'employee')
                 @include('backend.partials.__sidebar_for_employee_user')
-            @endif
+            @endif --}}
 
         </ul>
     </nav>

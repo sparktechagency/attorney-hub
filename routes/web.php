@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ZipController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthControllers\{
@@ -22,6 +24,7 @@ use App\Http\Controllers\BackendControllers\{
     LeaveController,
 };
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +37,7 @@ use App\Http\Controllers\BackendControllers\{
 */
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
+Route::post('/search', [HomeController::class, 'searchAttorney'])->name('search.attorney');
 
 Route::group(['namespace' => 'AuthControllers'], function () {
     Route::get('login', [LoginController::class, 'getLogin'])->name('get.login');
@@ -56,6 +60,14 @@ Route::group(['namespace' => 'AuthControllers'], function () {
 Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function () {
 
     Route::get('dashboard', [DashboardController::class, 'getDashboard'])->name('get.dashboard');
+
+    //Zip Code
+    Route::get('getZipCode', [ZipController::class, 'getZipCode'])->name('getZipCode');
+    Route::post('storeZipCode', [ZipController::class, 'storeZipCode'])->name('storeZipCode');
+
+    //category section
+    Route::get('category', [CategoryController::class, 'getCategory'])->name('get.category');
+    Route::post('addCategory', [CategoryController::class, 'storeCategory'])->name('storeCategory');
 
     //employee section
     Route::resource('employee', EmployeeController::class);

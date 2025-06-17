@@ -13,11 +13,20 @@
                                     Advice and Support</h3>
                                 <p>Find lawyer in your city</p>
                               
-                                <form action="#" class="newsletter_form">
+                                <form action="{{ route('search.attorney') }}" method="post" class="newsletter_form">
+                                    @csrf
                                     <div class="col-xl-8 col-lg-8 col-md-8 d-flex align-items-center">
-                                        <input class="form-control" type="text" placeholder="Enter your zip code" style="border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0;">
+                                        <input class="form-control @if($errors->has('zip_code')) is-invalid @endif" 
+                                               type="text" 
+                                               name="zip_code" 
+                                               placeholder="Enter your zip code" 
+                                               style="border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0;" 
+                                               value="{{ old('zip_code') }}">
                                         <button type="submit" style="background-color: rgb(242,198,77); color: white; border: none; padding: 8px 20px; cursor: pointer; border-radius: 0 5px 5px 0; width: 120px; height: 38px;">Search</button>
                                     </div>
+                                    @if($errors->has('zip_code'))
+                                        <span class="text-danger" style="padding: 8px 20px;">{{ $errors->first('zip_code') }}</span>
+                                    @endif
                                 </form>
                                 
                                 

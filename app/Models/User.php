@@ -35,7 +35,10 @@ class User extends Authenticatable
         'deleted_at',
         'deleted_by',
         'updated_at',
-        'updated_by'
+        'updated_by',
+        'category_id',
+        'zip', 
+        'license_number'
     ];
 
     /**
@@ -46,6 +49,26 @@ class User extends Authenticatable
     protected $hidden = [
         'role_id', 'password', 'remember_token',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'zipCode', 'zipCode');
+    }
+
+    public function isAttorney()
+    {
+        return $this->user_type === 'attorny';
+    }
+
+    public function scopeAttorneys($query)
+    {
+        return $query->where('user_type', 'attorny');
+    }
 
     /**
      * The attributes that should be cast.

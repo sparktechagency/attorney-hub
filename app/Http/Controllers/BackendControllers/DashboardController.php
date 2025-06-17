@@ -16,9 +16,9 @@ class DashboardController extends Controller
     }
 
     public function getDashboard(){
-        if(Auth::user()->user_type == 'employee')
+        if(Auth::user()->user_type == 'admin')
         {
-            $commons['page_title'] = 'Employee Dashboard';
+            $commons['page_title'] = 'Admin Dashboard';
             $commons['content_title'] = 'Show dashboard';
             $commons['main_menu'] = 'dashboard';
             $commons['current_menu'] = 'dashboard';

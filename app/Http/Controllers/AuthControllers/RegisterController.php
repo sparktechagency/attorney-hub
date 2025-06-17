@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\AuthControllers;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use PhpParser\Node\Expr\Array_;
-use App\Http\Requests\AuthRequests\RegisterRequest;
-use Webpatser\Countries\Countries;
-use App\Models\Store;
 use App\Models\User;
+use App\Models\Attorney;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Models\Area;
+use App\Models\Category;
 
 class RegisterController extends Controller
 {
@@ -19,62 +22,59 @@ class RegisterController extends Controller
 
     }
 
-    /*show register form*/
+
     public function getRegister(){
-        $commons['title'] = 'Login';
-        $commons['sub_title'] = 'Login';
-        $commons['main_menu'] = 'Login';
-        $commons['sub_menu'] = 'Login';
-        $commons['current_menu'] = 'Login';
-        return view('frontend.register')
-            ->with(compact('commons'));
+        // $commons['title'] = 'Login';
+        // $commons['sub_title'] = 'Login';
+        // $commons['main_menu'] = 'Login';
+        // $commons['sub_menu'] = 'Login';
+        // $commons['current_menu'] = 'Login';
+
+        $areas = Area::all();
+        $categories = Category::all();
+        return view('frontend.register', compact('areas', 'categories'));
     }
 
     /*process register form*/
-    public function postRegister(RegisterRequest $request){
+    public function postRegister(Request $request) {
+    try {
 
-        /*create new store object and set data */
-        $store = new Store();
-        $store->name = $request->store_name;
-        $store->contact = $request->contact;
-        $store->subscription_id = 1; //1=free
-        $store->subscribed_at = Carbon::now();
-        $store->currency = $request->currency;
-        $store->status = 1;
-        $store->created_at = Carbon::now();
+        if ($request->role == 'attorny') {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:users,email',
+                'zipCode' => 'required',
+                'category_id' => 'required',
+                'license_number' => 'required',
+                'password' => 'required'
+            ]);
 
-        /*save a store*/
-        if($store->save()){
+         
 
-            /*create new user object and set data*/
-            $user = new User();
-            $user->store_id = $store->id;
-            $user->role_id = 2; // 2=store-admin
-            $user->username = $request->username;
-            $user->password = bcrypt($request->password);
-            $user->email = $request->email;
-            $user->status = 1;
-            $user->created_at = Carbon::now();
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'zipCode' => $validatedData['zipCode'],
+                'category_id' => $validatedData['category_id'],
+                'license_number' => $validatedData['license_number'],
+                'user_type' => 'attorny',
+                'created_by' => Auth::check() ? Auth::user()->id : null,
+                'password' => Hash::make($validatedData['password']),
+            ]);
 
-            /*save user*/
-            if($user->save()){
-                if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1], $request->remember)) {
-                    // The user is active, not suspended, and exists.
-                    return redirect()->route('dashboard')
-                        ->with('success', 'You have successfully registered an created your store');
-                } else {
-                    // The user is not activated, suspended, and not exists.
-                    return redirect()->route('login')
-                        ->with('error', 'The user is not activated/suspended/not exists');
-                }
-            }
-
-            return redirect()->route('register')
-                ->with('error', 'Store created but user not created.');
-
+            return response()->json([
+                'success' => true,
+                'message' => 'Attorney registered successfully'
+            ], 200);
         }
 
-        return redirect()->route('register')
-            ->with('error', 'Register store operation failed.s');
-    }
+        return response()->json([
+            'error' => 'Invalid role specified'
+        ], 400);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'An error occurred during registration. Please try again.'
+        ], 500);
+    }    }
 }

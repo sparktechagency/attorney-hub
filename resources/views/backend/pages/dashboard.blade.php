@@ -22,7 +22,7 @@
                     <!-- small box -->
                     <div class="card bg-success">
                         <div class="card-header">
-                            <h3>Hi {{ Auth::user()->name_english }}</h3>
+                            <h3>Hi {{ Auth::user()->name }}</h3>
                             @php
                                 date_default_timezone_set('Asia/Dhaka');
                                 $time = time();

@@ -91,17 +91,27 @@
 </li> --}}
 
 
-<li class="nav-item @if($commons['main_menu'] == 'employee_index') menu-open @endif">
+<li class="nav-item @if($commons['main_menu'] == 'add_zip') menu-open @endif">
     <a
-        href="{{ route('employee.index') }}"
-        class="nav-link @if($commons['current_menu'] == 'employee_index') active @endif"
+        href="{{ route('getZipCode') }}"
+        class="nav-link @if($commons['current_menu'] == 'add_zip') active @endif"
     >
         <i class="nav-icon fas fa-plus"></i>
-        <p>Atorny List</p>
+        <p>Add Zip Code</p>
     </a>
 </li>
 
-{{-- <li class="nav-item @if($commons['main_menu'] == 'attendance') menu-open @endif">
+<li class="nav-item @if($commons['main_menu'] == 'category') menu-open @endif">
+    <a
+        href="{{ route('get.category') }}"
+        class="nav-link @if($commons['current_menu'] == 'category_menu') active @endif"
+    >
+        <i class="nav-icon fas fa-plus"></i>
+        <p>Add Category</p>
+    </a>
+</li>
+
+<li class="nav-item @if($commons['main_menu'] == 'attendance') menu-open @endif">
     <a
         href="#"
         class="nav-link @if($commons['main_menu'] == 'attendance') active @endif"
@@ -161,7 +171,7 @@
     </ul>
 
 
-</li> --}}
+</li>
 
 
 {{-- <li class="nav-item @if($commons['main_menu'] == 'action') menu-open @endif">

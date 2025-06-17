@@ -12,9 +12,9 @@
     <div class="collapse" id="timestamps{{$loop->iteration}}details">
         <div class="card card-body timestamps_collapse_body">
             <span>Created At: {{ \Carbon\Carbon::parse($row->created_at)->diffForHumans() }}</span>
-            <span>Created By: {{ isset($row->createdBy)? $row->createdBy->name_english : 'NA' }}</span>
+            <span>Created By: {{ isset($row->createdBy)? $row->createdBy->name : 'NA' }}</span>
             <span>Updated At: {{ \Carbon\Carbon::parse($row->updated_at)->diffForHumans() }}</span>
-            <span>Updated By: {{ isset($row->updatedBy)? $row->updatedBy->name_english : 'NA' }}</span>
+            <span>Updated By: {{ isset($row->updatedBy)? $row->updatedBy->name : 'NA' }}</span>
         </div>
     </div>
 </td>

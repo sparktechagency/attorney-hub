@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use App\Models\Attorney;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -11,6 +14,21 @@ class HomeController extends Controller
     public function getHome(){
         return view('frontend.index');
 
+    }
+
+    public function searchAttorney(Request $request){
+
+        //dd('hello');
+        $request->validate([
+            'zip_code' => 'required|string|max:255',
+        ]);
+        $searchTerm = $request->input('zip_code');
+        $attorneys = User::where('zipCode', 'LIKE', "%{$searchTerm}%")
+            ->get();
+
+        //dd($attorneys);
+
+        return view('frontend.search_results', compact('attorneys'));
     }
 
 

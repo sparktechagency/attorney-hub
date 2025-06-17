@@ -17,8 +17,8 @@
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-            <a href="#" class="" style="display: block; background-color: white; text-align: center;">
-                <img src="{{ asset('img/logo1.png') }}"  alt="Bangladesh Telecommunication Regulatory Commission" class="navbar-brand">
+            <a href="{{route('home')}}" class="" style="display: block; background-color: white; text-align: center;">
+                <img src="{{ asset('img/attorney_logo.png') }}"  alt="Bangladesh Telecommunication Regulatory Commission" class="navbar-brand">
             </a>
 
             <!--Sidebar-->
