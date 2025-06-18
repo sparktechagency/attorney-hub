@@ -186,67 +186,21 @@
 
 <script>
    
-
-    // User registration form submission
-    $('#user-register-btn').on('click', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData($('#user-register-form')[0]);
-        
-        $.ajax({
-            url: '',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            },
-            success: function(data) {
-                if (data.errors) {
-                    // Clear previous error messages
-                    $('.error').text('');
-                    $('.form-control').removeClass('is-invalid');
-                    
-                    // Display validation errors
-                    $.each(data.errors, function(key, value) {
-                        const inputField = $(`[name="${key}"]`);
-                        const errorSpan = $(`#${key}-error`);
-                        
-                        if (errorSpan.length) {
-                            errorSpan.text(value[0]);
-                            inputField.addClass('is-invalid');
-                        } else {
-                            inputField.addClass('is-invalid');
-                            inputField.after(`<span class="error-message text-danger">${value[0]}</span>`);
-                        }
-                    });
-                } else if (data.success) {
-                    alert('Registration successful!');
-                    window.location.href = data.redirect_url;
-                }
-            },
-            error: function(xhr) {
-                console.error('Error:', xhr.responseText);
-                alert('An error occurred. Please try again.');
-            }
-        });
-    });
-
     // Attorney registration form submission
     $('#attorney-register-btn').on('click', function(e) {
     e.preventDefault();
     console.log('Attorney register button clicked');
-    var formData = new FormData(document.getElementById('attorney-register-form'));
+    var formData = new FormData(document.getElementById('#attorney-register-form'));
+    console.log(formData);
     
     // Clear previous errors
     $('.error').text('');
     $('.form-control').removeClass('is-invalid');
     
     // Get the form data
-    const form = $('#attorney-register-form')[0];
-    const formData = new FormData(form);
-    console.log(formData);
+    // const form = $('#attorney-register-form')[0];
+    // const formData = new FormData(form);
+    // console.log(formData);
     
     $.ajax({
         url: '{{ route("post.register") }}',

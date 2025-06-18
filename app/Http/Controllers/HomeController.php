@@ -20,7 +20,7 @@ class HomeController extends Controller
 
         //dd('hello');
         $request->validate([
-            'zip_code' => 'required|string|max:255',
+            'zip_code' => 'required|numeric|digits:4',
         ]);
         $searchTerm = $request->input('zip_code');
         $attorneys = User::where('zipCode', 'LIKE', "%{$searchTerm}%")
