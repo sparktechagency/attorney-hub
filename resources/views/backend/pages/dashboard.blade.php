@@ -23,7 +23,7 @@
                     <div class="card bg-success">
                         <div class="card-header">
                             <h3>Hi {{ Auth::user()->name }}</h3>
-                            @php
+                            {{-- @php
                                 date_default_timezone_set('Asia/Dhaka');
                                 $time = time();
                                 $t = date("H:i:s",$time);
@@ -45,9 +45,9 @@
                                 $clockIn = App\Models\AttendenceLog::where('attendance_date',date('Y-m-d'))->where('employee_id',Auth::user()->id)->first();
                                 // var_dump($clockIn);
                                 $clockOut = App\Models\AttendenceLog::where('attendance_date',date('Y-m-d'))->where('employee_id',Auth::user()->id)->WhereNotNull('inTime')->WhereNotNull('outTime')->first();
-                            @endphp
+                            @endphp --}}
                             {{-- dd($clockIn); --}}
-                            @if($clockIn == '')
+                            {{-- @if($clockIn == '')
                             <form action="{{ route('clockIn.dashboard') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <button type="submit" class="btn btn-primary text-right mb-2"  title="Give Your Attendance">Clock In</button>
@@ -63,7 +63,7 @@
                             @endif
                             @if($clockOut != '')
                                 <h4>Your Total Attendance Is Done</h4>
-                            @endif
+                            @endif --}}
 
                         </div>
                         <div class="card-body">
