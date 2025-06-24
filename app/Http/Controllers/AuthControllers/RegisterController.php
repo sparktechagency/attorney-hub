@@ -37,44 +37,46 @@ class RegisterController extends Controller
 
     /*process register form*/
     public function postRegister(Request $request) {
-    try {
+        try {
+            if ($request->role == 'attorny') {
+                $request->validate([
+                    'name' => 'required|string|max:255',
+                    'email' => 'required|email|max:255|unique:users,email',
+                    'zipCode' => 'required',
+                    'category_id' => 'required',
+                    'license_number' => 'required',
+                    'password' => 'required|min:6'
+                ]);
 
-        if ($request->role == 'attorny') {
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255|unique:users,email',
-                'zipCode' => 'required',
-                'category_id' => 'required',
-                'license_number' => 'required',
-                'password' => 'required'
-            ]);
+                //dd($request->all());
 
-         
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'user_type' => 'attorny',
+                    'status' => 1,
+                ]);
 
-            $user = User::create([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'zipCode' => $validatedData['zipCode'],
-                'category_id' => $validatedData['category_id'],
-                'license_number' => $validatedData['license_number'],
-                'user_type' => 'attorny',
-                'created_by' => Auth::check() ? Auth::user()->id : null,
-                'password' => Hash::make($validatedData['password']),
-            ]);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Attorney registered successfully'
+                ], 200);
+            }
 
             return response()->json([
-                'success' => true,
-                'message' => 'Attorney registered successfully'
-            ], 200);
-        }
+                'error' => 'Invalid role specified'
+            ], 400);
 
-        return response()->json([
-            'error' => 'Invalid role specified'
-        ], 400);
-        
-    } catch (\Exception $e) {
-        return response()->json([
-            'error' => 'An error occurred during registration. Please try again.'
-        ], 500);
-    }    }
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An error occurred during registration. Please try again.'
+            ], 500);
+        }
+    }
+
 }

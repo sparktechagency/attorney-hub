@@ -20,26 +20,28 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'profile_image',
-        'password',
-        'role_id',
-        'accesses',
-        'permissions',
-        'remember_token',
-        'status',
-        'created_at',
-        'created_by',
-        'deleted_at',
-        'deleted_by',
-        'updated_at',
-        'updated_by',
-        'category_id',
-        'zip', 
-        'license_number'
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'profile_image',
+    //     'password',
+    //     'role_id',
+    //     'accesses',
+    //     'permissions',
+    //     'remember_token',
+    //     'status',
+    //     'created_at',
+    //     'created_by',
+    //     'deleted_at',
+    //     'deleted_by',
+    //     'updated_at',
+    //     'updated_by',
+    //     'category_id',
+    //     'zip', 
+    //     'license_number'
+    // ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Attorney;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,8 @@ class HomeController extends Controller
     }
 
     public function getHome(){
-        return view('frontend.index');
+        $categories = Category::where('status', 1)->get();
+        return view('frontend.index', compact('categories'));
 
     }
 

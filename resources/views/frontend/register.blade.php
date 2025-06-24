@@ -102,7 +102,7 @@
                                             <option value="{{ $area->zipCode }}" {{ old('zipCode') == $area->zipCode ? 'selected' : '' }}>{{ $area->zipCode }}</option>
                                         @endforeach
                                     </select>
-                                    <span class="error invalid-feedback" id="zip-error"></span>
+                                    <span class="error invalid-feedback" id="zipCode-error"></span>
                                 </div>
                         
                                 <div class="form-group mb-3">
@@ -113,13 +113,13 @@
                                             <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                    <span class="error invalid-feedback" id="category-error"></span>
+                                    <span class="error invalid-feedback" id="category_id-error"></span>
                                 </div>
                         
                                 <div class="form-group mb-3">
                                     <label for="license-number">License Number</label>
                                     <input type="text" name="license_number" id="license-number" value="{{ old('license_number') }}" class="form-control" placeholder="Enter your license number">
-                                    <span class="error invalid-feedback" id="license-number-error"></span>
+                                    <span class="error invalid-feedback" id="license_number-error"></span>
                                 </div>
                         
                                 <div class="form-group mb-3">
@@ -131,7 +131,7 @@
                                 <div class="form-group mb-4">
                                     <label for="attorney-password-confirm">Confirm Password</label>
                                     <input type="password" name="confirm_password" id="attorney-password-confirm" class="form-control" placeholder="Confirm your password">
-                                    <span class="error invalid-feedback" id="confirm-password-error"></span>
+                                    <span class="error invalid-feedback" id="confirm_password-error"></span>
                                 </div>
                         
                                 <div class="form-group">
@@ -185,59 +185,44 @@
 @section('scripts')
 
 <script>
+
+
+
    
     // Attorney registration form submission
     $('#attorney-register-btn').on('click', function(e) {
-    e.preventDefault();
-    console.log('Attorney register button clicked');
-    var formData = new FormData(document.getElementById('#attorney-register-form'));
-    console.log(formData);
-    
-    // Clear previous errors
-    $('.error').text('');
-    $('.form-control').removeClass('is-invalid');
-    
-    // Get the form data
-    // const form = $('#attorney-register-form')[0];
-    // const formData = new FormData(form);
-    // console.log(formData);
-    
-    $.ajax({
-        url: '{{ route("post.register") }}',
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            if (response.success) {
-                alert('Registration successful!');
-                window.location.href = '/login';
-            }
-        },
-        error: function(xhr) {
-            console.log(data);
-            if (xhr.status === 422) {
-                // Validation errors
-                const errors = xhr.responseJSON.errors;
-                $.each(errors, function(key, value) {
-                    const errorElement = $(`#${key}-error`);
-                    if (errorElement.length) {
-                        errorElement.text(value[0]);
-                        $(`[name="${key}"]`).addClass('is-invalid');
-                    }
-                });
-            } else {
-                console.error('Error:', xhr.responseText);
-                alert('An error occurred. Please try again.');
-            }
-        }
-    });
-});
-    // User register button click
-    $('#user-register-btn').on('click', function(e) {
         e.preventDefault();
-        console.log('User register button clicked');
-        // $(this).closest('form').submit();
+        var formData = new FormData($('#attorney-register-form')[0]);
+        console.log(formData);
+        
+        // Clear previous errors
+        $('.error').text('');
+        $('.form-control').removeClass('is-invalid');
+        
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('post.register') }}',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
+                if (data.success) {
+                    alert('Registration successful!');
+                }
+            },
+            error: function(xhr) {
+                console.log(xhr);
+                const errors = xhr.responseJSON.errors;
+                for (let field in errors) {
+                    $(`[name="${field}"]`).addClass('is-invalid');
+                    $(`#${field}-error`).text(errors[field][0]);
+                }
+            }
+        });
     });
+
 </script>
 @endsection

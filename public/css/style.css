@@ -12,6 +12,24 @@
   -ms-flex-pack: start;
   justify-content: start;
 }
+.attorney_heading{
+  font-size: 75px;
+}
+
+.about_area_1{
+  background: #4da8da;
+  padding-top: 150px;
+  padding-bottom: 120px;
+  margin-right: 50px;
+  margin-left: 50px;
+  position: relative;
+}
+
+.about_area_1 .single_about_info h3{
+  font-size: 38px;
+  font-weight: 700;
+  color: #ffffff;
+}
 
 /* Normal desktop :1200px. */
 /* Normal desktop :992px. */
@@ -115,6 +133,23 @@ label {
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
+}
+
+.single_about_info h3{
+  font-size: 43px;
+  font-weight: 450;
+  color: #ffffff;
+  font-family: "Playfair Display", serif;
+}
+
+.single_about_info p{
+  font-size: 16px;
+    font-weight: 400;
+    color: #e1e1e1;
+    margin-bottom: 50px;
+    margin-top: 16px;
+    line-height: 32px;
+
 }
 
 /* line 78, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/theme-default.scss */
@@ -235,7 +270,7 @@ h3 {
 .overlay2::before {
   position: absolute;
   content: "";
-  background-color: #1F1F1F;
+  background-color: #4da8da;
   top: 0;
   left: 0;
   width: 100%;
@@ -717,7 +752,7 @@ h3 {
   top: 0;
   background: transparent;
   z-index: 999;
-  background: #000;
+  background: #4da8da;
 }
 
 /* line 9, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_header.scss */
@@ -944,7 +979,7 @@ h3 {
   transition: transform 500ms ease, background 500ms ease;
   -webkit-transition: transform 500ms ease, background 500ms ease;
   box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.1);
-  background: #000;
+  background: #4da8da;
 }
 
 @media (max-width: 767px) {
@@ -1029,7 +1064,7 @@ h3 {
 /* line 7, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_slider.scss */
 .slider_area {
   padding: 0 50px;
-  background: #000;
+  background: #4da8da;
 }
 
 @media (max-width: 767px) {
@@ -1226,7 +1261,7 @@ h3 {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(31, 31, 31, 0.9);
+  background: #4da8da;
 }
 
 /* line 33, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_practice.scss */
@@ -1277,9 +1312,9 @@ h3 {
 
 /* line 59, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_practice.scss */
 .practice_area .single_practice .practice_hover p {
-  font-size: 16px;
+  font-size: 12px;
   color: #C7C7C7;
-  margin-bottom: 21px;
+  margin-bottom: -8px;
 }
 
 @media (min-width: 1200px) and (max-width: 1500px) {
@@ -1580,6 +1615,7 @@ h3 {
   font-size: 16px;
   line-height: 28px;
   margin-bottom: 20px;
+  color: black;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -1642,7 +1678,7 @@ h3 {
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer {
-  background: #202020;
+  background: #4da8da;
 }
 
 /* line 3, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
@@ -1693,7 +1729,7 @@ h3 {
 /* line 28, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer .footer_top .footer_widget p.footer_text {
   font-size: 14px;
-  color: #C7C7C7;
+  color: #ffffff;
   margin-bottom: 23px;
   font-weight: 400;
   line-height: 28px;
@@ -1701,7 +1737,7 @@ h3 {
 
 /* line 34, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer .footer_top .footer_widget p.footer_text a.domain {
-  color: #B2B2B2;
+  color: #ffffff;
   font-weight: 400;
 }
 
@@ -1731,7 +1767,7 @@ h3 {
 /* line 60, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer .footer_top .footer_widget ul li a {
   font-size: 14px;
-  color: #C7C7C7;
+  color: #ffffff;
   line-height: 42px;
 }
 
@@ -1781,13 +1817,14 @@ h3 {
 /* line 100, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer .footer_top .footer_widget .newsletter_text {
   font-size: 14px;
-  color: #BABABA;
+  color: #ffffff;
 }
 
 /* line 106, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer .copy-right_text {
   padding-bottom: 30px;
-  background: #000000;
+  border: 1px solid #f2c64d;
+  background: #4da8da;
 }
 
 /* line 109, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
@@ -1798,7 +1835,7 @@ h3 {
 /* line 112, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer .copy-right_text .copy_right {
   font-size: 14px;
-  color: #C7C7C7;
+  color: #ffffff;
   margin-bottom: 0;
   font-weight: 400;
 }
@@ -1829,8 +1866,8 @@ h3 {
 
 /* line 132, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_footer.scss */
 .footer .socail_links ul li a {
-  background: #313131;
-  color: #8B8B8B;
+  background: #f2c64d;
+  color: #fff;
   width: 40px;
   height: 40px;
   -webkit-border-radius: 50%;
@@ -1961,6 +1998,15 @@ h3 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  margin-bottom: 120px;
+}
+
+b{
+  color: rgb(248, 248, 248) !important;
+}
+
+.col-md-3{
+  max-width: 19% !important;
 }
 
 @media (max-width: 767px) {

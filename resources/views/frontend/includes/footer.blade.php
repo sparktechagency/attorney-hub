@@ -6,8 +6,8 @@
                     <div class="col-xl-4 col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <div class="footer_logo">
-                                <a href="index.html">
-                                    <img src="img/logo.png" alt="">
+                                <a href="{{ route('home') }}">
+                                    <img height="55px" width="230px" src="{{asset('img/attorney_logo.png')}}" alt="">
                                 </a>
                             </div>
                             <p class="footer_text">200, A-block, Green road, USA <br>
@@ -80,11 +80,14 @@
                 <div class="footer_border"></div>
                 <div class="row">
                     <div class="col-xl-12">
-                        <p class="copy_right text-center">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="{{ route('home') }}" target="_blank">LAWYER</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <div class="text-center" style="font-family: Arial, Helvetica, sans-serif; font-size: 1rem; font-weight: 500; color: #ffffff;">
+                            Copyright © 2005-2025.<br>
+                            Owned and Operated by Latin Marketing and Communication Corp.<br>
+                            All Rights Reserved.<br>
+                            Subdivision of 1-800-NY-Abogado®
+                        </div>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                 </div>
             </div>

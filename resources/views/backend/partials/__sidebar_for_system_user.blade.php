@@ -111,7 +111,7 @@
     </a>
 </li>
 
-<li class="nav-item @if($commons['main_menu'] == 'attendance') menu-open @endif">
+{{-- <li class="nav-item @if($commons['main_menu'] == 'attendance') menu-open @endif">
     <a
         href="#"
         class="nav-link @if($commons['main_menu'] == 'attendance') active @endif"
@@ -171,7 +171,7 @@
     </ul>
 
 
-</li>
+</li> --}}
 
 
 {{-- <li class="nav-item @if($commons['main_menu'] == 'action') menu-open @endif">

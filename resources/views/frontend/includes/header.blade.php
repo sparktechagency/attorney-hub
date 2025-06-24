@@ -38,8 +38,8 @@
                             @auth
                             
                             @else
-                            <a href="{{ route('get.login') }}" style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer; text-decoration: none;">Login</a>
-                            <a href="{{ route('get.register')}}" style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Register</a>
+                            {{-- <a href="{{ route('get.login') }}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer; text-decoration: none;">Login</a>
+                            <a href="{{ route('get.register')}}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer;">Register</a> --}}
                             @endauth
                         </div>
                         {{-- <div class="col-xl-3 col-lg-2 d-none d-lg-block">
