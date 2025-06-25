@@ -38,6 +38,7 @@ use App\Http\Controllers\BackendControllers\{
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
 Route::post('/search', [HomeController::class, 'searchAttorney'])->name('search.attorney');
+Route::get('/about', [HomeController::class, 'getAbout'])->name('about');
 
 Route::group(['namespace' => 'AuthControllers'], function () {
     Route::get('login', [LoginController::class, 'getLogin'])->name('get.login');

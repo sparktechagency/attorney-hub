@@ -33,5 +33,9 @@ class HomeController extends Controller
         return view('frontend.search_results', compact('attorneys'));
     }
 
+    public function getAbout(){
+        return view('frontend.about');
+    }
+
 
 }

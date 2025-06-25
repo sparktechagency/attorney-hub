@@ -1,5 +1,17 @@
 @extends('frontend.master')
 
+<style>
+    /* Custom tooltip styles */
+    .tooltip {
+        --bs-tooltip-max-width: 900px; /* Increased width for longer descriptions */
+    }
+    .tooltip-inner {
+        max-width: 100%;
+        font-size: 17px; /* Increased font size */
+        padding: 12px 16px;
+    }
+</style>
+
 @section('content')
     <!-- slider_area_start -->
     <div class="slider_area ">
@@ -39,7 +51,7 @@
     </div>
     <!-- slider_area_end -->
 
-        <!-- about_area _start  -->
+    <!-- about_area _start  -->
     <div class="about_area">
         <div class="opacity_icon d-none d-lg-block">
             <i class="flaticon-balance"></i>
@@ -113,21 +125,24 @@
                     </div>
                 </div>
             </div>
-            <div class="row no-gutters justify-content-center">
+            <div class="row justify-content-center">
                 @foreach ($categories as $category)
-                <div class="col-md-3">
-                    <div class="single_practice">
-                        <div class="practice_image">
-                            <img src="img/practice/1.png" alt="">
-                        </div>
-                        <div class="practice_hover text-center">
-                            <div class="hover_inner">
-                               
-                                <h3>{{ $category->name ?? '' }}</h3>
-                                <p>{{ $category->short_description ?? '' }}</p>
-                                <a href="#" class="lern_more">Learn More</a>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3 mb-4 d-flex align-items-stretch">
+                    <div class="card w-100 category-card" style="color: #4da8da; background-color: #4da8da; border-radius: 10px; transition: all 0.3s ease;"
+                         data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $category->short_description ?? '' }}">
+                        <a href="#">
+                            <div class="card-body">
+                                <h3 class="card-title text-center" style="color: #ffffff; font-size: 30px;">{{ $category->name ?? '' }}</h3>
+                                <div class="card-description-wrapper" style="position: relative;">
+                                    <p class="card-text card-short" style="color: #e1e1e1; margin-bottom: 0;">
+                                        {{ \Illuminate\Support\Str::limit($category->short_description ?? '', 100, '...') }}
+                                    </p>
+                                    <p class="card-text card-full" style="color: #e1e1e1; margin-bottom: 0; display: none;">
+                                        {{ $category->short_description ?? '' }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 @endforeach
@@ -136,6 +151,16 @@
     </div>
     <!-- practice_area_end -->
 
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl, {
+                    customClass: 'wide-tooltip' // Optional: additional class for more control
+                });
+            });
+        });
+    </script>
+        
 
 @endsection 

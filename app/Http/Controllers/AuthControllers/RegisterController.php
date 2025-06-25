@@ -37,6 +37,8 @@ class RegisterController extends Controller
 
     /*process register form*/
     public function postRegister(Request $request) {
+
+        dd('test');
         try {
             if ($request->role == 'attorny') {
                 $request->validate([

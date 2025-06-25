@@ -63,13 +63,20 @@
                     <div class="col-xl-4 col-md-6 col-lg-4">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                    Subscribe
+                                    Contact Us
                             </h3>
-                            <form action="#" class="newsletter_form">
-                                <input type="text" placeholder="Enter your mail">
-                                <button type="submit">Sign Up</button>
+                            <form action="#" class="contact_form">
+                                <div class="mb-2">
+                                    <input type="text" name="name" class="form-control" placeholder="Enter your name">
+                                </div>
+                                <div class="mb-2">
+                                    <input type="email" name="email" class="form-control" placeholder="Enter your email">
+                                </div>
+                                <div class="mb-2">
+                                    <textarea name="message" class="form-control" placeholder="Enter your message" rows="3" style="resize: none;"></textarea>
+                                </div>
+                                <button type="submit" class="btn w-100" style="background-color: #f2c64d; color: #fff; border: none;">Send Message</button>
                             </form>
-                            <p class="newsletter_text">Subscribe newsletter to get updates</p>
                         </div>
                     </div>
                 </div>

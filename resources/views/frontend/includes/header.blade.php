@@ -16,9 +16,10 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="{{ route('home')}}">home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="Practice.html">Practice Area</a></li>
-                                        <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                        <li><a href="{{ route('about')}}">About</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{{ route('get.register')}}">Become an Attorney</a></li>
+                                        {{-- <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">blog</a></li>
                                                 <li><a href="single-blog.html">single-blog</a></li>
@@ -28,8 +29,8 @@
                                             <ul class="submenu">
                                                 <li><a href="elements.html">elements</a></li>
                                             </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        </li> --}}
+                                        
                                     </ul>
                                 </nav>
                             </div>
