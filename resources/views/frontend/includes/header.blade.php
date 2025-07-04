@@ -18,7 +18,13 @@
                                         <li><a href="{{ route('home')}}">home</a></li>
                                         <li><a href="{{ route('about')}}">About</a></li>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="{{ route('get.register')}}">Become an Attorney</a></li>
+
+                                        @auth
+
+                                        @else
+                                              <li><a href="{{ route('get.register')}}">Become an Attorney</a></li>
+                                        @endauth
+                                       
                                         {{-- <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">blog</a></li>
@@ -37,10 +43,12 @@
                         </div>
                         <div>
                             @auth
-                            
+                            <a href="{{ route('get.attorney.profile.edit', Auth::user()->uuid) }}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer; text-decoration: none;">Attorney Profile</a>
+
+                            <a href="{{ route('post.logout') }}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer; text-decoration: none;">Logout</a>
                             @else
-                            {{-- <a href="{{ route('get.login') }}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer; text-decoration: none;">Login</a>
-                            <a href="{{ route('get.register')}}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer;">Register</a> --}}
+                                <a href="{{ route('get.attorney.dashboard') }}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer; text-decoration: none;">Attorney Dashboard</a>
+                                {{-- <a href="{{ route('get.register')}}" style="background-color: rgb(242,198,77); color: white; border: none; padding: 10px 20px; cursor: pointer;">Register</a> --}}
                             @endauth
                         </div>
                         {{-- <div class="col-xl-3 col-lg-2 d-none d-lg-block">

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'name',
@@ -45,5 +47,25 @@ class Category extends Model
     public function getDepartment()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+    public function uniqueIds()
+    {
+        return ['uuid'];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($category) {
+            if (empty($category->uuid)) {
+                $category->uuid = Str::uuid();
+            }
+        });
     }
 }

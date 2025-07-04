@@ -16,7 +16,7 @@ class BpcMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->user_type != 'bpc') {
+        if (auth()->user()->user_type != 'attorny') {
             auth()->logout();
             return redirect()->route('get.login')->with('warning', 'You were unauthorised!');
         }

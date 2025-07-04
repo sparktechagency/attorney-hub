@@ -21,7 +21,7 @@ class LoggedInMiddleware
             return $next($request);
         }
 
-        return redirect()->route('get.dashboard')
+        return redirect()->route('home')
             ->with('warning', 'You are already logged in');
 
     }

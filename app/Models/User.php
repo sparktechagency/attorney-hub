@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
     protected $table = 'users';
 
@@ -70,6 +71,16 @@ class User extends Authenticatable
     public function scopeAttorneys($query)
     {
         return $query->where('user_type', 'attorny');
+    }
+
+    public function uniqueIds()
+    {
+        return ['uuid'];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 
     /**

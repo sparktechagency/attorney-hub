@@ -23,7 +23,7 @@ class AuthCustomMiddleware
             return $this->nocache( $next($request) );
         else
             return redirect()->route('get.login')
-                ->with('warning', 'Already logged out.');
+                ->with('success', 'Please login to continue.');
     }
 
     protected function nocache($response)

@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{asset('css/gijgo.css')}}">
     <link rel="stylesheet" href="{{asset('css/slicknav.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+   
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -67,6 +69,26 @@
     <script src="{{asset('js/jquery.form.js')}}"></script>
     <script src="{{asset('js/jquery.validate.min.js')}}"></script>
     <script src="{{asset('js/mail-script.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+    
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+    
+        @if(session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    
+        @if(session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
+
+
 
     <script src="{{asset('js/main.js')}}"></script>
 

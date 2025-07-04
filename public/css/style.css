@@ -1400,7 +1400,7 @@ h3 {
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/211 Lawyer/HTML/scss/_loyers.scss */
 .our_loyers {
-  padding-top: 150px;
+  padding-top: 100px;
   padding-bottom: 90px;
   margin-right: 50px;
   margin-left: 50px;
@@ -5349,4 +5349,19 @@ h6 {
 }
 .fa {
   margin-top: 11px !important;
+}
+
+.attorney p{
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.fixed-height-card {
+  height: 500px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+}
+
+.fixed-height-card p, .fixed-height-card h5 .fixed-height-card h6{
+  color: #ffffff;
 }

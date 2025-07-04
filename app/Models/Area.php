@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Area extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'zipCode',
@@ -39,5 +40,15 @@ class Area extends Model
     public function getDepartment()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function uniqueIds()
+    {
+        return ['uuid'];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 }

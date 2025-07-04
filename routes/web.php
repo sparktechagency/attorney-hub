@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ZipController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\AuthControllers\{
     ForgotPasswordController,
     LoginController,
@@ -23,7 +24,7 @@ use App\Http\Controllers\BackendControllers\{
     ReportController,
     LeaveController,
 };
-
+use Illuminate\Routing\RouteRegistrar;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +38,14 @@ use App\Http\Controllers\BackendControllers\{
 */
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
-Route::post('/search', [HomeController::class, 'searchAttorney'])->name('search.attorney');
+Route::get('/search', [HomeController::class, 'searchAttorney'])->name('search.attorney');
+Route::get('/filter', [HomeController::class, 'filterAttorney'])->name('filter.attorney');
 Route::get('/about', [HomeController::class, 'getAbout'])->name('about');
+Route::get('/category/{uuid}', [HomeController::class, 'getCategoryWiseAttorney'])->name('category.wise.attorney');
 
 Route::group(['namespace' => 'AuthControllers'], function () {
+
+    //Route::get('home', [HomeController::class, 'getHome'])->name('home');
     Route::get('login', [LoginController::class, 'getLogin'])->name('get.login');
     Route::post('login', [LoginController::class, 'postLogin'])->name('post.login');
 
@@ -50,13 +55,15 @@ Route::group(['namespace' => 'AuthControllers'], function () {
     Route::get('register', [RegisterController::class, 'getRegister'])->name('get.register');
     Route::post('register', [RegisterController::class, 'postRegister'])->name('post.register');
 
-    Route::get('forgot-password', [ForgotPasswordController::class, 'getForgotPassword'])->name('get.forgot.password');
-    Route::post('forgot-password', [ForgotPasswordController::class, 'postForgotPassword'])->name('post.forgot.password');
-
-    Route::get('reset-password/{token}', [ForgotPasswordController::class, 'getResetPassword'])->name('get.reset.password');
-    Route::post('reset-password', [ForgotPasswordController::class, 'postResetPassword'])->name('post.reset.password');
 });
 
+Route::group(['prefix' => 'attorney', 'middleware' => 'authenticated'], function () {
+    Route::get('attorneyProfile', [DashboardController::class, 'getAttorneyProfile'])->name('get.attorney.dashboard');
+    Route::get('attorneyProfile/edit/{uuid}', [DashboardController::class, 'getAttorneyProfileEdit'])->name('get.attorney.profile.edit');
+    Route::get('paypal/payment', [PayPalController::class, 'handlePayment'])->name('make.payment');
+    Route::get('paypal/payment/success', [PayPalController::class, 'paymentSuccess'])->name('success.payment');
+    Route::get('paypal/payment/cancel', [PayPalController::class, 'paymentCancel'])->name('cancel.payment');
+});
 
 Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function () {
 
@@ -70,9 +77,6 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
     Route::get('category', [CategoryController::class, 'getCategory'])->name('get.category');
     Route::post('addCategory', [CategoryController::class, 'storeCategory'])->name('storeCategory');
 
-    //employee section
-    Route::resource('employee', EmployeeController::class);
-    Route::get('employee/list',[EmployeeController::class, 'employee_list'])->name('employee.list');
 
     //Department section
     Route::resource('department', DepartmentController::class);
@@ -80,26 +84,8 @@ Route::group(['prefix' => 'backend', 'middleware' => 'authenticated'], function 
     //Designation section
     Route::resource('designation', DesignationController::class);
 
-    //Disciplinary Section
-    Route::resource('disciplinary', DisciplinaryController::class);
-    Route::get('discipline/employee/list', [DisciplinaryController::class,'employee_list'])->name('discipline.employee.list');
-    Route::post('taken/disciplinary/action', [DisciplinaryController::class,'disciplinary_action'])->name('take.disciplinary.action');
-    Route::get('punished/employee/list', [DisciplinaryController::class,'punishedEmployeeList'])->name('punished.employee.list');
-    Route::get('show/punished/employee/list', [DisciplinaryController::class,'showPunishedEmployeeList'])->name('show.punished.employee.list');
-
     //Set Office Time
     Route::resource('officeTime',SetOfficeTimeController::class);
-
-    //Attendence Section
-    Route::resource('dailyAttendance',DailyAttendenceController::class);
-    Route::post('clockIn/daily',[DailyAttendenceController::class,'clockInAttendance'])->name('clockIn.dashboard');
-    Route::post('clockOut/daily',[DailyAttendenceController::class,'clockOutAttendance'])->name('clockOut.dashboard');
-
-
-    //Report Section
-    Route::resource('report',ReportController::class);
-    // Route::post('/get-attendaceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
-    Route::post('/get-attendanceReport-pdf', [ReportController::class, 'generatePdf'])->name('attendance.pdf');
 
     //Leave Section
     Route::resource('leave',LeaveController::class);

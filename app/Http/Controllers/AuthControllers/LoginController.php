@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\AuthControllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -33,8 +33,17 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($valid_credentials, $request->remember_me)){
-            return redirect()->route('get.dashboard')
-                ->with('success', 'You are successfully logged in.');
+            if(Auth::user()->user_type == 'attorny'){
+                return redirect()->route('get.attorney.dashboard')
+                    ->with('success', 'You are successfully logged in.');
+            }
+            else if(Auth::user()->user_type == 'admin')
+            {
+                return redirect()->route('get.dashboard')
+                    ->with('success', 'You are successfully logged in.');
+            }
+            // return redirect()->route('get.dashboard')
+            //     ->with('success', 'You are successfully logged in.');
         }
 
         return redirect()->route('get.login')

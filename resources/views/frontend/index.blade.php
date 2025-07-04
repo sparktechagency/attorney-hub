@@ -25,7 +25,7 @@
                                     Advice and Support</h3>
                                 <p>Find lawyer in your city</p>
                               
-                                <form action="{{ route('search.attorney') }}" method="post" class="newsletter_form">
+                                <form action="{{ route('search.attorney') }}" method="get" class="newsletter_form">
                                     @csrf
                                     <div class="col-xl-8 col-lg-8 col-md-8 d-flex align-items-center">
                                         <input class="form-control @if($errors->has('zip_code')) is-invalid @endif" 
@@ -130,12 +130,12 @@
                 <div class="col-12 col-sm-6 col-md-3 col-lg-3 mb-4 d-flex align-items-stretch">
                     <div class="card w-100 category-card" style="color: #4da8da; background-color: #4da8da; border-radius: 10px; transition: all 0.3s ease;"
                          data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $category->short_description ?? '' }}">
-                        <a href="#">
+                            <a href="{{ route('category.wise.attorney', $category->uuid) }}">
                             <div class="card-body">
                                 <h3 class="card-title text-center" style="color: #ffffff; font-size: 30px;">{{ $category->name ?? '' }}</h3>
                                 <div class="card-description-wrapper" style="position: relative;">
                                     <p class="card-text card-short" style="color: #e1e1e1; margin-bottom: 0;">
-                                        {{ \Illuminate\Support\Str::limit($category->short_description ?? '', 100, '...') }}
+                                        {{ \Illuminate\Support\Str::limit($category->short_description ?? '', 200, '...') }}
                                     </p>
                                     <p class="card-text card-full" style="color: #e1e1e1; margin-bottom: 0; display: none;">
                                         {{ $category->short_description ?? '' }}
